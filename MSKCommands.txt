@@ -1,0 +1,59 @@
+# MSK Comands For Creating a Cluster and Streaming Data
+
+Install Java:
+sudo yum install java-1.8.0 -y
+
+Get Kafka:wget https://archive.apache.org/dist/kafka/2.2.1/kafka_2.12-2.2.1.tgz
+
+Extract Kafka:
+tar -xzf kafka_2.12-2.2.1.tgz
+
+Get Cluster ARN:
+aws kafka describe-cluster --cluster-arn "arn:aws:kafka:eu-west-2:571075478230:cluster/demo-MSK-Cluster/929f67d1-b540-430d-83c9-88d99c8546a8-3" --region eu-west-2
+
+export MSKZK="z-2.mskcluster-mskstack.qifcwo.c3.kafka.eu-west-2.amazonaws.com:2181,z-3.mskcluster-mskstack.qifcwo.c3.kafka.eu-west-2.amazonaws.com:2181,z-1.mskcluster-mskstack.qifcwo.c3.kafka.eu-west-2.amazonaws.com:2181"
+
+Create Topic:
+./bin/kafka-topics.sh --create --zookeeper $MSKZK --replication-factor 3 --partitions 3 --topic AWSKafkaTopic
+AWSKafkaDest.
+./bin/kafka-topics.sh --zookeeper $MSKZK --describe --topic AWSKafkaTopic
+
+User the Trust store:
+cp /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.282.b08-1.amzn2.0.1.x86_64/jre/lib/security/cacerts /tmp/kafka.client.truststore.jks
+
+client.properties:
+security.protocol=SSL
+ssl.truststore.location=/tmp/kafka.client.truststore.jks
+
+Get Brokers:
+aws kafka get-bootstrap-brokers --cluster-arn arn:aws:kafka:eu-west-2:571075478230:cluster/demo-MSK-Cluster/929f67d1-b540-430d-83c9-88d99c8546a8-3 --region eu-west-2
+
+
+export BootstrapBrokerStringTls="b-3.msk-demo-cluster.6a8fn9.c3.kafka.eu-west-2.amazonaws.com:9094,b-1.msk-demo-cluster.6a8fn9.c3.kafka.eu-west-2.amazonaws.com:9094,b-2.msk-demo-cluster.6a8fn9.c3.kafka.eu-west-2.amazonaws.com:9094"
+Producer:
+./kafka-console-producer.sh --broker-list "b-3.msk-demo-cluster.6a8fn9.c3.kafka.eu-west-2.amazonaws.com:9094,b-1.msk-demo-cluster.6a8fn9.c3.kafka.eu-west-2.amazonaws.com:9094,b-2.msk-demo-cluster.6a8fn9.c3.kafka.eu-west-2.amazonaws.com:9094" --producer.config client.properties --topic AWSKafkaTopic
+
+Consumer:
+./kafka-console-consumer.sh --bootstrap-server $MSKBootStrap --consumer.config client.properties --topic AWSKafkaTutorialTopic --from-beginning
+
+./bin/kafka-console-consumer.sh --bootstrap-server $MSKBootStrap --consumer.config client.properties --topic AWSKafkaTutorialTopic --from-beginning
+
+b-2.demo-msk-cluster.aptjjm.c3.kafka.eu-west-2.amazonaws.com:9094,b-1.demo-msk-cluster.aptjjm.c3.kafka.eu-west-2.amazonaws.com:9094,b-3.demo-msk-cluster.aptjjm.c3.kafka.eu-west-2.amazonaws.com:9094
+b-3.demo-msk-cluster.aptjjm.c3.kafka.eu-west-2.amazonaws.com:9094,b-1.demo-msk-cluster.aptjjm.c3.kafka.eu-west-2.amazonaws.com:9094,b-2.demo-msk-cluster.aptjjm.c3.kafka.eu-west-2.amazonaws.com:9094
+
+bin/kafka-topics.sh --list --zookeeper $MSKZK
+bin/kafka-topics.sh --zookeeper $MSKZK --describe --topic TopicName
+bin/kafka-topics.sh --list --bootstrap-server b-3.msk-demo-cluster.tmopmu.c3.kafka.eu-west-2.amazonaws.com:9094,b-2.msk-demo-cluster.tmopmu.c3.kafka.eu-west-2.amazonaws.com:9094,b-1.msk-demo-cluster.tmopmu.c3.kafka.eu-west-2.amazonaws.com:9094
+
+export MSKBootStrap="b-3.msk-demo-cluster.tmopmu.c3.kafka.eu-west-2.amazonaws.com:9094,b-2.msk-demo-cluster.tmopmu.c3.kafka.eu-west-2.amazonaws.com:9094,b-1.msk-demo-cluster.tmopmu.c3.kafka.eu-west-2.amazonaws.com:9094"
+
+AWSKafkaTutorialTopicDestination
+
+export MSK_ZOOKEEPER="z-1.msk-demo-cluster.6rnmpz.c3.kafka.eu-west-2.amazonaws.com:2181,z-2.msk-demo-cluster.6rnmpz.c3.kafka.eu-west-2.amazonaws.com:2181,z-3.msk-demo-cluster.6rnmpz.c3.kafka.eu-west-2.amazonaws.com:2181"
+export MSK_BOOTSTARP="b-1.msk-demo-cluster.6rnmpz.c3.kafka.eu-west-2.amazonaws.com:9094,b-2.msk-demo-cluster.6rnmpz.c3.kafka.eu-west-2.amazonaws.com:9094,b-3.msk-demo-cluster.6rnmpz.c3.kafka.eu-west-2.amazonaws.com:9094"
+
+./kafka-topics.sh --create --zookeeper $MSK_ZOOKEEPER --replication-factor 3 --partitions 3 --topic AWSKafkaSourceTopic
+./kafka-topics.sh --create --zookeeper $MSK_ZOOKEEPER --replication-factor 3 --partitions 3 --topic AWSKafkaDestinationTopic
+
+./kafka-console-producer.sh --broker-list $MSK_BOOTSTARP --producer.config client.properties --topic AWSKafkaSourceTopic
+./kafka-console-consumer.sh --bootstrap-server $MSK_BOOTSTARP --consumer.config client.properties --topic AWSKafkaDestinationTopic --from-beginning
