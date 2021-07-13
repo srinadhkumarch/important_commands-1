@@ -1,0 +1,6 @@
+minikube start
+minikube dashboard
+kubectl create deployment hello-minikube --image=nginx
+kubectl expose deployment hello-minikube --type=NodePort --port=8080
+kubectl get services hello-minikube
+minikube service hello-minikube

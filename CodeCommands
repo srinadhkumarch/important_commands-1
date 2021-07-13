@@ -1,0 +1,508 @@
+aws eks --region eu-west-2 update-kubeconfig --name EKS-Dev-Cluster --profile dev-cluster
+aws sts get-caller-identity
+
+aws ecr get-login-password --region eu-west-2 | docker login --username AWS --password-stdin 267925113789.dkr.ecr.eu-west-2.amazonaws.com
+
+docker push 267925113789.dkr.ecr.eu-west-2.amazonaws.com/lanistar/lanistar-core/lanistar-accomplish-api
+
+aws sts assume-role --role-arn arn:aws:iam::267925113789:role/ecr-access-role-github --role-session-name github-lanistar-user --profile default
+aws sts assume-role --role-arn arn:aws:iam::300380593535:policy/ecr-access-role-github-for-prod-v2 --role-session-name github-lanistar-user 
+
+arn:aws:iam::300380593535:policy/ecr-access-role-github-for-prod-v2
+arn:aws:iam::300380593535:policy/ecr-access-role-github-for-prod-v2
+
+"AccessKeyId": "ASIAT4YMUZO66MDOMUFF",
+        "SecretAccessKey": "R6PEZvOQqUOTwOV9HPqJXnCBa0GC/mawRJI8yaZp",
+        "SessionToken": "IQoJb3JpZ2luX2VjEP3//////////wEaCWV1LXdlc3QtMiJGMEQCIDvcGkznGrdyQtwooJcoEkhc4zFlb0ZfAM6J+Wbt1I3SAiBA5nzOZ4eSCOobmGa5h8exvLVublw78JOqMHkOTYirtCqqAgiW//////////8BEAAaDDI2NzkyNTExMzc4OSIMDBX4MT90y+mJJHZCKv4BfReMILtAe3Gv2DAxhbCdvdfCXuf8VjzPev7Pdk8K7OPTVk3ESW3asJAGywtsekiwUcU6zsQM6NR2C4qNrLyC63EDwj6tgDosSHN8JKOu7ZQe5WRVe326vXJXsIVvn7xtQ1fYD9dda2gpPRzYEioYqkesbUWNjyOy1AG+Nas8CGDT0ZuMOB/jWaBoOeOc+KkTY2E7XLhWZvg8ped0mICbHoLiNEEqxxBpad+bPDP4x4HSbvFpNNs3VuyzJSFxUsoXTVhXBJoNZCjU9lulxG9HtrZsQC4KTGlqaHuR6CwsdgqMS3Adgz6IAdTIkxpBmenqMUs/6W4sU6PWe6MtSygwr46bhQY6ngEv/rAq9GfYsXjf+soVt/P1fAVbRbfocTqOBYfR8NxKqarH5eNJJPlzHXYOg/Ux8NDrSlBxz1vuwsjyxP0yA2Of8X7dNec35Ks/3Gn5DJHj2LXXPfOBMRdefqAaEPbnOegovAFPZF8KgWOtGNH95h3hM6Dqs+ukrRW4o40GSaP0l5vLGQFwFjPEu35ylYmhXUFyrcr2tGa9EA8xtteYnA==",
+
+eksctl create cluster -f eks-prod-cluster.yaml
+
+arn:aws:eks:eu-west-2:022866771242:cluster/prod-cluster
+
+kubectl config use-context arn:aws:eks:eu-west-2:267925113789:cluster/EKS-Prod-Cluster
+
+kubectl --kubeconfig=config-demo config unset clusters.
+kubectl config unset clusters.arn:aws:eks:eu-west-2:267925113789:cluster/EKS-Prod-Cluster
+{
+    "UserId": "AIDAUL4AUDV7QO4HV7FMX",
+    "Account": "300380593535",
+    "Arn": "arn:aws:iam::300380593535:user/srinadh"
+            arn:aws:iam::300380593535:user/srinadh
+}
+
+- userarn: arn:aws:iam::300380593535:role/OrganizationAccountAccessRole
+  username: adminrole
+  groups:
+    - system:masters
+
+kubectl describe configmap -n kube-system aws-auth
+kubectl edit configmap aws-auth -n kube-system
+
+
+lanistar-api-server-d8dbddf9-6kkx7
+
+kubectl edit deploy lanistar-api-server | -f /app/dist/common/data/versions.json
+
+kubectl exec -it myContainer -n myNamespace -- bash
+
+kubectl exec -it redis-api-55f77d5588-ghw46 -- sh
+kubectl exec -it lanistar-api-server -- sh
+lanistar-api-server-6d4c9c6bc-gjfxr
+
+lanistar-api-server-d8dbddf9-6kkx7 
+lanistar-api-server-d8dbddf9-th6jx
+
+lanistar-api-server-d56f986b9-hvrss 
+lanistar-api-server-d56f986b9-vlwbr 
+
+
+git clone -b dev-EKS-Prod https://github.com/lanistar/lanistar-api-server.git
+
+. AWSConfigure.sh && aclanistar-newprod
+
+rm -rf .git*
+
+aws cloudformation create-stack --stackname eks-prod-v2-RDS  
+    --template-body file:///some/local/path/templates/startmyinstance.json 
+    --parameters file:///some/local/path/params/startmyinstance-parameters.json
+
+Account: 267925113789
+
+Instance ID	Public IPv4 address	Private IPv4 addresses
+ i-03da588d634b9a708 (LinuxBastion-RDS)	 35.178.110.170	 10.160.3.30
+
+sudo yum install mysql-server
+sudo yum install mysql-server -y
+sudo yum install postgresql -y
+
+mysql -h database-1-instance-1.c8x9rsu5q9pe.eu-west-2.rds.amazonaws.com -p 3306 -u admin -p
+psql -h eks-dev-cluster.cluster-cnmw0yyhtydw.eu-west-2.rds.amazonaws.com -p 5432 -U postgres -W
+psql -h dev-lanistar-microservices-logs.dev.lanistar.com -p 5432 -U postgres -W
+psql -h dev-lanistar-microservices-db.dev.lanistar.com -p 5432 -U postgres -W dbname=lanistar_cardapi_v2
+
+eks-dev-cluster.cnmw0yyhtydw.eu-west-2.rds.amazonaws.com
+eks-dev-cluster.cnmw0yyhtydw.eu-west-2.rds.amazonaws.com
+
+sam.cmd deploy --template-file user_queue_packaged.yml --stack-name user-queue --region eu-west-2 --aws-profile lanistar-prod-v2
+
+aws sts decode-authorization-message --encoded-message zYJJ0CFnNVN6aUSrSRej_h7kCL4IqXnGIonXBkGdztyZSqsMVZ25PoCoBiIC2uztBp3IifmowxK2yfJDSQsTcPqnhMYwQcCW2jYxyo8JVPmPRwo82cx5j2t4jlfQFvG983mYPWon4bd37V10FfQucQlGNb1RZjQ8eMBOOIpOk3Bo4Rd16eg28oLrwckEcus6GCE21RmJrIFyr_DfDY6Y_H6uRVLTeuabCry2jubDJMmKJJu2i75jIx8s0U6NRB87CGIkeOlIudXn5lIUH1R_lbE_NYz1id1PHVoKw1hc-XMKCEJvxQB00RLHMMO-WY2UYfxI1uhXsFgBWKa-WgKKc5-IVPQ0kmIUItxlhDHXBEZ5GoR985S4QICezhsCxDa-88gBUOVXt4WEZhe_TTRrOAYJiMfJ7JzL2n_fLHcbbhwocmKQlIG4sXMx57-Fv7tRhSpe7h7Y8ggbF6R-ss3zTgxdYlleggkSizfxYopYsF0Frvg7P5Wn6cEUDbqa_NeldFSjTgewl4JpDgBeD-ZF_soq6zWjUVMuYiVFWrEyQU4jE8U8bi5pjMGVHYOaKLfCvFqtms2KF1koTLzdkCkO0Vma2NyTz-DZsnTG2oD88mG9wY08jLhhOABYXfIfmEub9hgYp-LJEVK3UbmULXSoz8hSBDzcnpu9RpJkfxJ-i6q0mOZyVyv9K810AAYrNarluFWoYDW0v4icueR83phDYvzxy7sbonk9Ow_9uYrYxm2_OWvrSaQpE8qmfuwc_LLbEvl6qZ1khUhSUuAZb9LGyMsjYS4aGCgo1PgBePe5I9c0A1118XRbFG6SwkQ
+
+aws iam create-policy --policy-name ALBIngressControllerIAMPolicy --policy-document https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/master/docs/examples/iam-policy.json
+
+arn:aws:iam::267925113789:policy/ALBIngressControllerIAMPolicy"
+
+kubectl create ns appmesh-system
+
+eksctl create iamserviceaccount \
+    --region eu-west-2 \
+    --name alb-ingress-controller \
+    --namespace kube-system \
+    --cluster EKS-Dev-Cluster \
+    --attach-policy-arn arn:aws:iam::571075478230:policy/ALBIngressControllerIAMPolicy \
+    --approve \
+    --override-existing-serviceaccounts
+
+arn:aws:iam::267925113789:instance-profile/ecr-role-for-github
+arn:aws:iam::267925113789:role/ecr-role-for-github
+
+arn:aws:iam::267925113789:role/ecr-access-role-github
+arn:aws:iam::300380593535:user/github-lanistar-user
+
+eksctl create iamserviceaccount \
+    --cluster EKS-Prod-Cluster \
+    --namespace appmesh-system \
+    --name appmesh-controller \
+    --attach-policy-arn  arn:aws:iam::aws:policy/AWSCloudMapFullAccess,arn:aws:iam::aws:policy/AWSAppMeshFullAccess \
+    --override-existing-serviceaccounts \
+    --approve
+
+helm upgrade -i appmesh-controller eks/appmesh-controller \
+    --namespace appmesh-system \
+    --set region=eu-west-2 \
+    --set serviceAccount.create=false \
+    --set serviceAccount.name=appmesh-controller
+
+create S3 bucker for Ingress loging ALB
+
+arn:aws:elasticloadbalancing:eu-west-2:300380593535:loadbalancer/net/a71907325c8eb491f83cba7c812af2e6/f89053d7b4a3da3c
+
+{
+    "Version": "2012-10-17",
+    "Id": "AWSConsole-AccessLogs-Policy-1596529365489",
+    "Statement": [
+        {
+            "Sid": "AWSConsoleStmt-1596529365489",
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": "arn:aws:iam::652711504416:root"
+            },
+            "Action": "s3:PutObject",
+            "Resource": "arn:aws:s3:::logs-eks-prod-cluster-app-loadbalancer-eu-west-2/*"
+        },
+        {
+            "Sid": "AWSLogDeliveryWrite",
+            "Effect": "Allow",
+            "Principal": {
+                "Service": "delivery.logs.amazonaws.com"
+            },
+            "Action": "s3:PutObject",
+            "Resource": "arn:aws:s3:::logs-eks-prod-cluster-app-loadbalancer-eu-west-2/*",
+            "Condition": {
+                "StringEquals": {
+                    "s3:x-amz-acl": "bucket-owner-full-control"
+                }
+            }
+        },
+        {
+            "Sid": "AWSLogDeliveryAclCheck",
+            "Effect": "Allow",
+            "Principal": {
+                "Service": "delivery.logs.amazonaws.com"
+            },
+            "Action": "s3:GetBucketAcl",
+            "Resource": "arn:aws:s3:::logs-eks-prod-cluster-app-loadbalancer-eu-west-2"
+        }
+    ]
+}
+
+{
+  "Id": "Policy1621645907801",
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+        "Effect": "Allow",
+        "Principal": {
+            "Service": "logdelivery.elb.amazonaws.com"
+        },
+        "Action": "s3:PutObject",
+        "Resource": "arn:aws:s3:::logs-alb-ingress-eu-west-2"
+    }
+  ]
+}
+
+
+---------------
+install appmesh-controller
+---------------
+choco install kubernetes-helm
+helm repo add eks https://aws.github.io/eks-charts
+kubectl apply -k "github.com/aws/eks-charts/stable/appmesh-controller//crds?ref=master"
+kubectl create ns appmesh-system
+
+eksctl utils associate-iam-oidc-provider \
+  --cluster EKS-Prod-Cluster \
+  --approve
+
+eksctl create iamserviceaccount \
+    --cluster EKS-Dev-Cluster \
+    --namespace appmesh-system \
+    --name appmesh-controller \
+    --attach-policy-arn  arn:aws:iam::aws:policy/AWSCloudMapFullAccess,arn:aws:iam::aws:policy/AWSAppMeshFullAccess \
+    --override-existing-serviceaccounts \
+    --approve 
+
+eksctl delete iamserviceaccount --namespace appmesh-system --name appmesh-controller --cluster EKS-Prod-Cluster
+
+helm upgrade -i appmesh-controller eks/appmesh-controller \
+    --namespace appmesh-system \
+    --set region=eu-west-2 \
+    --set serviceAccount.create=false \
+    --set serviceAccount.name=appmesh-controller \
+    --set tracing.enabled=true \
+    --set tracing.provider=x-ray
+
+kubectl get deployment appmesh-controller \
+    -n appmesh-system
+
+kubectl apply -f EKS-Prod-Cluster-app-mesh.yaml
+
+kubectl label namespace default appmesh.k8s.aws/sidecarInjectorWebhook=enabled mesh=eks-prod-cluster
+
+helm upgrade -i appmesh-inject eks/appmesh-inject \
+                --namespace appmesh-system \
+                --set tracing.enabled=true \
+                --set tracing.provider=x-ray
+
+helm upgrade -i appmesh-controller eks/appmesh-controller \
+    --namespace appmesh-system \
+    --set tracing.provider=x-ray
+        
+--------------
+cloudwatch
+--------------
+
+kubectl apply -f https://raw.githubusercontent.com/aws-samples/amazon-cloudwatch-container-insights/latest/k8s-deployment-manifest-templates/deployment-mode/daemonset/container-insights-monitoring/cloudwatch-namespace.yaml
+kubectl apply -f https://raw.githubusercontent.com/aws-samples/amazon-cloudwatch-container-insights/latest/k8s-deployment-manifest-templates/deployment-mode/daemonset/container-insights-monitoring/cwagent/cwagent-serviceaccount.yaml
+curl -O https://raw.githubusercontent.com/aws-samples/amazon-cloudwatch-container-insights/latest/k8s-deployment-manifest-templates/deployment-mode/daemonset/container-insights-monitoring/cwagent/cwagent-configmap.yaml
+
+kubectl apply -f cwagent-configmap.yaml
+
+curl -O  https://raw.githubusercontent.com/aws-samples/amazon-cloudwatch-container-insights/latest/k8s-deployment-manifest-templates/deployment-mode/daemonset/container-insights-monitoring/cwagent/cwagent-daemonset.yaml
+kubectl apply -f cwagent-daemonset.yaml
+
+curl -O https://raw.githubusercontent.com/aws-samples/amazon-cloudwatch-container-insights/latest/k8s-deployment-manifest-templates/deployment-mode/daemonset/container-insights-monitoring/quickstart/cwagent-fluentd-quickstart.yaml | sed "s/{{cluster_name}}/cluster-name/;s/{{region_name}}/cluster-region/" 
+kubectl apply -f cwagent-fluentd-quickstart.yaml
+
+------------
+
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.2.0/aio/deploy/recommended.yaml
+Kubernetes-Dashboard
+kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
+
+curl -o example-iam-policy.json https://raw.githubusercontent.com/kubernetes-sigs/aws-ebs-csi-driver/v1.0.0/docs/example-iam-policy.json
+
+aws iam create-policy \
+    --policy-name AmazonEKS_EBS_CSI_Driver_Policy \
+    --policy-document file://example-iam-policy.json
+
+eksctl create iamserviceaccount \
+    --name ebs-csi-controller-sa \
+    --namespace kube-system \
+    --cluster EKS-Prod-Cluster \
+    --attach-policy-arn arn:aws:iam::267925113789:policy/AmazonEKS_EBS_CSI_Driver_Policy \
+    --approve \
+    --override-existing-serviceaccounts
+
+helm repo add aws-ebs-csi-driver https://kubernetes-sigs.github.io/aws-ebs-csi-driver
+helm repo update
+
+helm upgrade -install aws-ebs-csi-driver aws-ebs-csi-driver/aws-ebs-csi-driver \
+  --namespace kube-system \
+  --set enableVolumeResizing=true \
+  --set enableVolumeSnapshot=true \
+  --set serviceAccount.controller.create=false \
+  --set serviceAccount.controller.name=ebs-csi-controller-sa
+
+kubectl get pod -n kube-system -l "app.kubernetes.io/name=aws-ebs-csi-driver,app.kubernetes.io/instance=aws-ebs-csi-driver"
+
+------
+
+kubectl get --raw /apis/metrics.k8s.io/v1beta1/namespaces/default/pods/nginx-deployment-6747f8c9d-s5stp
+
+kubectl describe apiservice v1beta1.metrics.k8s.io
+
+curl -O https://raw.githubusercontent.com/kubernetes/autoscaler/master/cluster-autoscaler/cloudprovider/aws/examples/cluster-autoscaler-autodiscover.yaml
+
+------------------
+cat <<EOF | kubectl apply -f -
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: admin-user
+  namespace: kubernetes-dashboard
+EOF
+
+cat <<EOF | kubectl apply -f -
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: admin-user
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+subjects:
+- kind: ServiceAccount
+  name: admin-user
+  namespace: kubernetes-dashboard
+EOF
+
+http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/
+
+kubectl proxy
+
+kubectl -n kubernetes-dashboard get secret $(kubectl -n kubernetes-dashboard get sa/admin-user -o jsonpath="{.secrets[0].name}") -o go-template="{{.data.token | base64decode}}"
+aws ec2 import-key-pair --key-name "my-key" --public-key-material fileb://~/.ssh/bastion_key/bastion.pub
+ssh -i "bastion" srinadh@ec2-3-229-182-199.compute-1.amazonaws.com
+ssh -N -L 9000:sentry.dev.lanistar.com:9000 ec2-user@bastion-host.dev.lanistar.com -i bastion
+ssh -N -L 9090:10.160.3.136:9000 ec2-user@10.160.3.26 -i eks-prod-london-kp.pem
+
+ssh -N -L 9090:sentry.prodv2.v2.lanistar.com:9000 ec2-user@bastion-host.prod.v2.lanistar.com -i eks-prod-london-kp.pem
+ssh -N -L 9000:sentry.dev.lanistar.com:9000 ec2-user@bastion-host.dev.lanistar.com -i eks-dev-london-kp.pem
+
+pip install -r ./requirements.txt
+
+dsn: "http://dfc3d7de6102460199ed3859ec05a2fc@localhost:9090/10",
+
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+
+
+aws lambda create-function --function-name handled_exception \
+--zip-file fileb://function.zip --handler lambda_handler --runtime nodejs12.x \
+--role arn:aws:iam::123456789012:role/lambda-ex
+
+
+xoxb-901855467383-2176534487632-lq1AlaEKmVWPT8AG1ZN0NElz
+
+kubectl get poddisruptionbudgets
+docker run -it --rm -d -p 8080:80 --name web 32518/nginx-sample:v2 --env-file .env_example
+useradd devops-pp --uid 52 -d /home/devops-pp
+docker exec -it 96c0902db6e3e sh
+sed "s/INPUT_DATA/$API_KEY/g" /usr/share/nginx/html/index.html
+nginxinc/nginx-unprivileged:1.20
+docker run -it --rm -d -p 8080:80 --name web 32518/nginx-devops:d1
+
+
+-----------
+
+helm repo index botkube
+
+ecr-access-role-github
+
+eksctl utils associate-iam-oidc-provider \
+                      --region eu-west-2 \
+                      --cluster EKS-Dev-Cluster \
+                      --approve
+    
+helm install aws-load-balancer-controller eks/aws-load-balancer-controller \
+                      --set clusterName=EKS-Dev-Cluster \
+                      --set serviceAccont.create=false \
+                      --set region=$AWS_REGION \
+                      --set vpcId=$VPC_ID \
+                      --set serviceAccount.name=aws-load-balancer-controller \
+                      --set watchNamespace=default \
+                      --set ingressClass=alb \
+                      -n kube-system
+
+
+aws s3api create-bucket --bucket logs-eks-dev-cluster-app-loadbalancer-eu-west-2 \
+            --region eu-west-2 \
+            --create-bucket-configuration LocationConstraint=eu-west-2 \
+            --object-lock-enabled-for-bucket 
+
+aws s3api put-public-access-block \
+    --bucket logs-eks-dev-cluster-app-loadbalancer-eu-west-2 \
+    --public-access-block-configuration "BlockPublicAcls=true,IgnorePublicAcls=true,BlockPublicPolicy=true,RestrictPublicBuckets=true"
+
+cat s3-access-policy.json | sed "s/{{EKS_CLUSTER_NAME}}/EKS-Dev-Cluster/g;s/{{AWS_REGION}}/eu-west-2/g" > s3-access-policy-updated.json
+
+aws s3api put-bucket-policy \
+        --bucket logs-eks-dev-cluster-app-loadbalancer-eu-west-2 \
+        --policy file://s3-access-policy-updated.json
+
+aws s3api put-bucket-encryption \
+    --bucket logs-eks-dev-cluster-app-loadbalancer-eu-west-2 \
+    --server-side-encryption-configuration '{"Rules": [{"ApplyServerSideEncryptionByDefault": {"SSEAlgorithm": "AES256"}}]}'
+
+dev.lanistar.com	NS	Simple	-	
+ns-558.awsdns-05.net.
+ns-1625.awsdns-11.co.uk.
+ns-308.awsdns-38.com.
+ns-1314.awsdns-36.org.
+
+
+kubernetes.io/cluster/EKS-Dev-Cluster	shared
+kubernetes.io/role/elb  1
+alpha.eksctl.io/cluster-name	eks-dev-cluster
+eksctl.cluster.k8s.io/v1alpha1/cluster-name	dev-cluster
+
+aws rds create-db-cluster --db-cluster-identifier eks-dev-cluster --engine aurora-mysql \
+     --engine-version 5.7.12 --master-username user-name --master-user-password password \
+     --db-subnet-group-name mysubnetgroup --vpc-security-group-ids sg-c7e5b0d2
+
+aws cloudformation create-stack --stack-name myteststack \
+    --template-body file://Create-RDS.yaml \
+    --parameters file://parameters-network.json
+
+KE1F01EgluW8cC59v8ff
+UZpXY9T7vgosd6aY1u7i
+
+sudo ln -s /usr/local/bin/sentry-cli /usr/bin/sentry-cli
+
+ssh-tunnel-dev-db-tunnel-key
+---------
+
+# Delete all existing App Mesh CRs:
+kubectl delete virtualservices --all --all-namespaces
+kubectl delete virtualnodes --all --all-namespaces
+kubectl delete meshes --all --all-namespaces
+
+# Delete all existing App Mesh CRDs.
+kubectl delete customresourcedefinition/virtualservices.appmesh.k8s.aws
+kubectl delete customresourcedefinition/virtualnodes.appmesh.k8s.aws
+kubectl delete customresourcedefinition/virtualrouters.appmesh.k8s.aws
+kubectl delete customresourcedefinition/meshes.appmesh.k8s.aws
+
+kubectl delete -k "github.com/aws/eks-charts/stable/appmesh-controller//crds?ref=master"
+
+helm uninstall appmesh-controller --namespace appmesh-system
+
+helm upgrade -i appmesh-controller eks/appmesh-controller \
+  --namespace appmesh-system \
+  --set region=eu-west-2 \
+  --set serviceAccount.create=false \
+  --set serviceAccount.name=appmesh-controller
+
+eksctl utils associate-iam-oidc-provider --region=eu-west-2 \
+    --cluster=EKS-Prod-Cluster \
+    --approve
+
+eksctl create iamserviceaccount --cluster EKS-Prod-Cluster \
+    --namespace appmesh-system \
+    --name appmesh-controller \
+    --attach-policy-arn arn:aws:iam::267925113789:policy/AWSAppMeshK8sControllerIAMPolicy  \
+    --override-existing-serviceaccounts \
+    --approve
+
+            helm upgrade -i appmesh-controller eks/appmesh-controller \
+                          --namespace appmesh-system \
+                          --set region=eu-west-2 \
+                          --set serviceAccount.create=false \
+                          --set serviceAccount.name=appmesh-controller \
+                          --set tracing.enabled=true \
+                          --set tracing.provider=x-ray
+
+aws iam create-policy \
+    --policy-name AWSAppMeshK8sControllerIAMPolicy \
+    --policy-document file://controller-iam-policy.json
+
+
+kubectl delete virtualservices --all --all-namespaces
+kubectl delete virtualnodes --all --all-namespaces
+kubectl delete meshes --all --all-namespaces
+
+# Delete all existing App Mesh CRDs.
+kubectl delete customresourcedefinition/virtualservices.appmesh.k8s.aws
+kubectl delete customresourcedefinition/virtualnodes.appmesh.k8s.aws
+kubectl delete customresourcedefinition/meshes.appmesh.k8s.aws
+
+arn:aws:rds:us-east-1:300380593535:snapshot:dev-rds-cluster-snapshot-account300380593535
+
+"arn:aws:sqs:*:571075478230:*"
+"arn:aws:ses:eu-west-2:571075478230:*"
+
+https://openvpn.net/client-connect-vpn-for-windows/
+
+curl --location --request POST 'https://lanistar-customer-api.dev.lanistar.com/Customer/CreateToken' \
+ --header 'Content-Type: application/json' \
+ --data-raw '{ "ApiKey" : "d077d23e-2b6f-44e7-85db-b0a97a617066" }'
+
+customresourcedefinition.apiextensions.k8s.io/virtualnodes.appmesh.k8s.aws
+kubectl describe customresourcedefinition.apiextensions.k8s.io/virtualnodes.appmesh.k8s.aws > virtualnodes.txt
+kubectl describe customresourcedefinition.apiextensions.k8s.io/virtualrouters.appmesh.k8s.aws > virtualrouter.txt
+
+"arn:aws:sqs:*:571075478230:*"
+"arn:aws:ses:eu-west-2:571075478230:*"
+
+
+    "Db": "Host=dev-lanistar-microservices-db.dev.lanistar.com;Port=5432;Database=lanistar_banking;Username=postgres;Password=KE1F01EgluW8cC59v8ff",
+    "Logs": "Host=dev-lanistar-microservices-logs.dev.lanistar.com;Port=5432;User ID=postgres;Password=UZpXY9T7vgosd6aY1u7i;Database=lanistar_logs;",
+
+CREATE EXTENSION aws_s3 CASCADE;
+
+kubectl describe customresourcedefinition.apiextensions.k8s.io/virtualnodes.appmesh.k8s.aws --grace-period=0 --force
+
+lanistar-accomplish-api   arn:aws:appmesh:eu-west-2:267925113789:mesh/eks-prod-cluster/virtualNode/lanistar-accomplish-api_default   20d
+lanistar-banking-api      arn:aws:appmesh:eu-west-2:267925113789:mesh/eks-prod-cluster/virtualNode/lanistar-banking-api_default      20d
+lanistar-card-api         arn:aws:appmesh:eu-west-2:267925113789:mesh/eks-prod-cluster/virtualNode/lanistar-card-api_default         20d
+lanistar-customer-api     arn:aws:appmesh:eu-west-2:267925113789:mesh/eks-prod-cluster/virtualNode/lanistar-customer-api_default     20d
+redis-api
+
+ kubectl port-forward -n prometheus deploy/prometheus-server 8080:9090
+ kubectl --namespace=prometheus port-forward deploy/prometheus-server 8080:9090
+
+ NODE_ENV=dev AWS_SDK_LOAD_CONFIG=1 sls deploy --config serverless.yml
+
+ echo Welcome | openssl base64
+ echo V2VsY29tZQo= | base64 --decode

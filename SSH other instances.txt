@@ -1,0 +1,26 @@
+Method 1 - use the same keys on the servers:
+
+Convert the keys to openssh format and upload the private keys to the servers. When you ssh to the destination host, specify the private key file:
+
+ssh -i mykey.pem private.ip.of.other.server
+Method 2 - Create new keys
+
+On each server run:
+
+ssh-keygen
+Hit enter enter enter. You'll have two files:
+
+.ssh/id_rsa
+.ssh/id_rsa.pub
+On Server A, cat and copy to clipboard the public key:
+
+cat ~/.ssh/id_rsa.pub
+[select and copy to your clipboard]
+ssh into Server B, and append the contents of that to the it's authorized_keys file:
+
+cat >> ~/.ssh/authorized_keys
+[paste your clipboard contents]
+[ctrl+d to exit]
+Now ssh from server A:
+
+ssh -i ~/.ssh/id_rsa private.ip.of.other.server

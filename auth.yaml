@@ -1,0 +1,48 @@
+Name:         aws-auth
+Namespace:    kube-system
+Labels:       <none>
+Annotations:  <none>
+
+Data
+====
+mapRoles:
+----
+- groups:
+  - system:bootstrappers
+  - system:nodes
+  rolearn: arn:aws:iam::300380593535:role/eksctl-dev-cluster-nodegroup-ng-1-NodeInstanceRole-115VKHKXNA5K3
+  username: system:node:{{EC2PrivateDNSName}}
+- groups:
+  - system:bootstrappers
+  - system:nodes
+  rolearn: arn:aws:iam::300380593535:role/eksctl-dev-cluster-nodegroup-ng-2-NodeInstanceRole-16XZ63VLH0NDX
+  username: system:node:{{EC2PrivateDNSName}}
+
+mapUsers:
+----
+- userarn: arn:aws:iam::300380593535:root
+  username: root
+  groups:
+    - system:masters
+- userarn: arn:aws:iam::300380593535:user/mert
+  username: mert
+  groups:
+    - system:masters
+- userarn: arn:aws:iam::300380593535:user/murat
+  username: murat
+  groups:
+    - system:masters
+- userarn: arn:aws:iam::300380593535:user/hamdi
+  username: hamdi
+  groups:
+    - system:masters
+- userarn: arn:aws:iam::300380593535:user/fatih.aslantas
+  username: fatih.aslantas
+  groups:
+    - system:masters
+- userarn: arn:aws:iam::300380593535:user/srinadh
+  username: srinadh
+  groups:
+    - system:masters
+
+Events:  <none>
